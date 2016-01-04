@@ -1,0 +1,61 @@
+<article id="project" class="project">
+  <header>
+    <%= image_for(@project) %>
+    <h1><%= @project.name %></h1>
+    <h2><%= format_pledging_ends_on(@project) %></h2>
+  </header>
+  <p>
+    <%= @project.description %>
+  </p>
+  <h3>Target Pledge Amount</h3>
+  <p>
+    <%= number_to_currency(@project.target_pledge_amount) %>
+  </p>
+  <h3>Pledge Amount Outstanding</h3>
+  <p>
+    <%= format_amount_outstanding(@project) %>
+  </p>
+  <h3>Website</h3>
+  <p>
+    <%= @project.website %>
+  </p>
+  <h3>Team Members</h3>
+  <p>
+    <%= @project.team_members %>
+  </p>
+  <% if @project.recent_pledges.any? %>
+    <h3>Recent Pledges</h3>
+    <ol id="pledges">
+      <% @project.recent_pledges.each do |pledge| %>
+        <li>
+          <%= mail_to(pledge.email, pledge.name) %> pledged
+          <span class="amount"><%= number_to_currency(pledge.amount) %></span>
+          (<span class="date"><%= time_ago_in_words(pledge.created_at) %> ago<span>)
+          <p>
+            &quot;<%= pledge.comment %>&quot;
+          </p>
+        </li>      
+      <% end %>
+    </ol>
+    <p>
+      View all <%= link_to pluralize(@project.pledges.size, "pledge"),
+                      project_pledges_path(@project) %>
+    </p>
+  <% end %>
+
+  <footer>
+
+    <p>
+      <%#= link_to "Pledge!", new_project_pledge_path(@project), class: "button ok pledge" %>
+      <%= format_pledge_button(@project) %>
+    </p>
+    <%#= link_to pluralize(@project.pledges.size, "pledge"),
+                project_pledges_path(@project) %>
+    <nav>
+      <%= link_to "Edit", edit_project_path(@project), class: "button" %>
+      <%= link_to "Delete", @project, 
+                            class: "button",
+                            method: :delete, data: { confirm: "Are you sure?" } %>
+    </nav>
+  </footer>  
+</article>

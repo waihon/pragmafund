@@ -1,0 +1,40 @@
+<%= form_for(@project) do |f| %>
+  <%= render "shared/errors", object: @project %>
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :name %>
+        <%= f.text_field :name, size: 80, autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :description %>
+        <%= f.text_area :description, cols: 60, rows: 5 %>
+      </li>
+      <li class="required">
+        <%= f.label :pledging_ends_on %>
+        <%= f.date_select :pledging_ends_on %>
+      </li>      
+      <li class="required">
+        <%= f.label :target_pledge_amount %>
+        <%= f.number_field :target_pledge_amount %>
+      </li>
+      <li>
+        <%= f.label :website %>
+        <%= f.text_field :website, size: 80 %>
+      </li>
+      <li>
+        <%= f.label :team_members %>
+        <%= f.text_field :team_members %>
+      </li>
+      <li>
+        <%= f.label :image_file_name, "Image filename" %>
+        <%= f.text_field :image_file_name, size: 30,
+                         placeholder: "GIF, JPG, or PNG file name" %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit %>
+      <%= link_to "Cancel", projects_path, class: "button" %>
+    </p>
+  </fieldset>
+<% end %>

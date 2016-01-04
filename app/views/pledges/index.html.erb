@@ -1,0 +1,20 @@
+<header id="content-header">
+  <h1>Pledges for <%= link_to @project.name, @project%></h1>
+</header>
+
+<ol id="pledges">
+  <% @pledges.each do |pledge| %>
+    <li>
+      <%= mail_to(pledge.email, pledge.name) %> pledged
+      <span class="amount"><%= number_to_currency(pledge.amount) %></span>
+      (<span class="date"><%= time_ago_in_words(pledge.created_at) %> ago<span>)
+      <p>
+        &quot;<%= pledge.comment %>&quot;
+      </p>
+    </li>
+    <p>
+      <%= link_to "Edit", edit_project_pledge_path(@project, pledge) %> |
+      <%= link_to "Delete", project_pledge_path(@project, pledge), method: :delete, data: { confirm: "Are you sure" } %>
+    </project>
+  <% end %>
+</ol>
