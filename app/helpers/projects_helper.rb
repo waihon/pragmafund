@@ -14,7 +14,7 @@ module ProjectsHelper
     #   image_tag(project.image_file_name)
     # end
     if project.image.exists?
-      image_tag(project.image.url)
+      image_tag(project.image.url(:small))
     else
       image_tag("placeholder.png")
     end

@@ -1,5 +1,8 @@
 class Project < ActiveRecord::Base
-  has_attached_file :image
+  has_attached_file :image, styles: {
+    small: "90x133>",
+    thumb: "50x50>"
+  }
 
   validates :name, presence: true
   validates :description, presence: true,
