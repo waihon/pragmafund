@@ -122,33 +122,34 @@ describe "A project" do
     end
   end
 
-  it "accepts properly formatted image file names" do
-    # Arrange
-    image_file_names = %w[projecta.jpg projectb.png project-c.gif p.gif PROJECTD.GIF]
-    image_file_names.each do |file_name|
-      project = Project.new(image_file_name: file_name)
+  # Paperclip will manage its own image attribute
+  # it "accepts properly formatted image file names" do
+  #   # Arrange
+  #   image_file_names = %w[projecta.jpg projectb.png project-c.gif p.gif PROJECTD.GIF]
+  #   image_file_names.each do |file_name|
+  #     project = Project.new(image_file_name: file_name)
 
-      # Action
-      project.valid?
+  #     # Action
+  #     project.valid?
 
-      # Assert
-      expect(project.errors[:image_file_name].any?).to eq(false)
-    end
-  end
+  #     # Assert
+  #     expect(project.errors[:image_file_name].any?).to eq(false)
+  #   end
+  # end
 
-  it "rejects improperly formatted image file names" do
-    # Arrange
-    image_file_names = %w[projecta.doc projectb.pdf project-c.tiff project .jpg .png .gif]
-    image_file_names.each do |file_name|
-      project = Project.new(image_file_name: file_name)
+  # it "rejects improperly formatted image file names" do
+  #   # Arrange
+  #   image_file_names = %w[projecta.doc projectb.pdf project-c.tiff project .jpg .png .gif]
+  #   image_file_names.each do |file_name|
+  #     project = Project.new(image_file_name: file_name)
 
-      # Action
-      project.valid?
+  #     # Action
+  #     project.valid?
 
-      # Assert
-      expect(project.errors[:image_file_name].any?).to eq(true)
-    end
-  end
+  #     # Assert
+  #     expect(project.errors[:image_file_name].any?).to eq(true)
+  #   end
+  # end
 
   it "has many pledges" do
     # Arrange

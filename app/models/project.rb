@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  has_attached_file :image
+
   validates :name, presence: true
   validates :description, presence: true,
                           length: { maximum: 500}
@@ -7,10 +9,13 @@ class Project < ActiveRecord::Base
     with: /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/
     #with: /(?:https?:\/\/)?(?:[\w]+\.)([a-zA-Z\.]{2,6})([\/\w\.-]*)*\/?/
   }
-  validates :image_file_name, allow_blank: true, format: {
-    with: /\w+\.(gif|jpg|png)\z/i,
-    message: "must reference a GIF, JPG, or PNG image"
-  }
+  # validates :image_file_name, allow_blank: true, format: {
+  #   with: /\w+\.(gif|jpg|png)\z/i,
+  #   message: "must reference a GIF, JPG, or PNG image"
+  # }
+  validates_attachment :image,
+    content_type: { content_type: ["image/jpeg", "image/png"] },
+    size: { less_than: 1.megabyte} 
 
   has_many :pledges, dependent: :destroy
 

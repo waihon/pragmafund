@@ -26,10 +26,17 @@
         <%= f.label :team_members %>
         <%= f.text_field :team_members %>
       </li>
-      <li>
-        <%= f.label :image_file_name, "Image filename" %>
-        <%= f.text_field :image_file_name, size: 30,
+      <!-- <li>
+        <%#= f.label :image_file_name, "Image filename" %>
+        <%#= f.text_field :image_file_name, size: 30,
                          placeholder: "GIF, JPG, or PNG file name" %>
+      </li> -->
+      <li>
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </li>
+      <li>
+        <%= image_for(@project) %>
       </li>
     </ol>
     <p>

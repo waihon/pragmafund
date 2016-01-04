@@ -7,7 +7,8 @@ describe "Viewing an individual project" do
                              website: "http://www.project-a.com", 
                              pledging_ends_on: 15.days.from_now.to_date,
                              team_members: "John Doe, Mary Jane",
-                             image_file_name: "projecta.jpg")
+                             #image_file_name: "project-a.png",
+                             image: open("#{Rails.root}/app/assets/images/project-a.png"))
 
     # Action
     visit project_url(project)
@@ -20,7 +21,8 @@ describe "Viewing an individual project" do
     #expect(page).to have_text(project.pledging_ends_on)
     expect(page).to have_text("15 days remaining")
     expect(page).to have_text(project.team_members)
-    expect(page).to have_selector("img[src$='#{project.image_file_name}']")
+    #expect(page).to have_selector("img[src$='#{project.image_file_name}']")
+    expect(page).to have_selector("img[src$='#{project.image.url}']")
   end
 
   it "shows the number of days remaining if the pledging end date is in the future" do

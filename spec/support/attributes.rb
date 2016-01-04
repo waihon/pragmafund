@@ -6,7 +6,8 @@ def project_attributes(overrides = {})
     website: "http://www.project-a.com", 
     pledging_ends_on: 15.days.from_now,
     website: "http://project-a.com",
-    image_file_name: "projecta.jpg"
+    #image_file_name: "projecta.jpg"
+    image: open("#{Rails.root}/app/assets/images/project-a.png")
   }.merge(overrides)
 end
 

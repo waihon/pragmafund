@@ -18,13 +18,16 @@ describe "Create a new project" do
     select (Time.now.year + 1).to_s, from: "project_pledging_ends_on_1i"
     fill_in "Website", with: "http://www.new-project.com"
     fill_in "Team members", with: "John Doe, Mary Jane"
-    fill_in "Image filename", with: "newproject.jpg"
+    #fill_in "Image filename", with: "project-a.png"
+    attach_file "Image", "#{Rails.root}/app/assets/images/project-a.png"
 
     click_button "Create Project"
 
     # Assert
-    expect(current_path).to eq(project_path(Project.last))
+    project = Project.last
+    expect(current_path).to eq(project_path(project))
     expect(page).to have_text("New Project")
+    expect(page).to have_selector("img[src$='#{project.image.url}']")
 
     expect(page).to have_text("Project successfully created!")
   end

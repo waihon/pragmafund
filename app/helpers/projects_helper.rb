@@ -8,10 +8,15 @@ module ProjectsHelper
   end
 
   def image_for(project)
-    if project.image_file_name.blank?
-      image_tag("placeholder.png")
+    # if project.image_file_name.blank?
+    #   image_tag("placeholder.png")
+    # else
+    #   image_tag(project.image_file_name)
+    # end
+    if project.image.exists?
+      image_tag(project.image.url)
     else
-      image_tag(project.image_file_name)
+      image_tag("placeholder.png")
     end
   end
 
